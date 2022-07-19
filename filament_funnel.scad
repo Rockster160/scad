@@ -1,3 +1,4 @@
+include <support/vars.scad>
 include <support/linepath.scad>
 include <support/in_to_mm.scad>
 include <support/polyround.scad>
@@ -8,7 +9,7 @@ od = in_to_mm(0.5);
 id = 5;
 plate = 0;
 depth = in_to_mm(2);
-wall = 1;
+wall = wall_size("paper");
 
 offset = id/2 + wall/2;
 

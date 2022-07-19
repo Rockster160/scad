@@ -1,8 +1,9 @@
+include <support/vars.scad>
 include <support/linepath.scad>
 include <support/arc.scad>
 
 phone_width = 20;
-wall = 3;
+wall = wall_size("weak");
 
 small_r = 20/2;
 big_r = 30/2;

@@ -1,14 +1,14 @@
+include <support/vars.scad>
 include <support/countersink.scad>
 include <support/in_to_mm.scad>
 
 opening = in_to_mm(3.1);
 break = in_to_mm(2.1);
-wall = 6;
+wall = wall_size("solid");
 // full_clip = in_to_mm(6 - 1 - 1.5);
 full_clip = opening + wall*2;
 small_depth = in_to_mm(4);
 depth = in_to_mm(4);
-rerr = 0.01;
 
 closing_c = in_to_mm(2.5);
 closing_c_depth = in_to_mm(1);

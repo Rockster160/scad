@@ -1,8 +1,8 @@
+include <support/vars.scad>
 include <support/in_to_mm.scad>
 include <support/roundedcube.scad>
 
-wall = 1;
-r_err = 0.01;
+wall = wall_size("paper");
 
 w = in_to_mm(5);
 d = in_to_mm(2.5);

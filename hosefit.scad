@@ -1,11 +1,11 @@
+include <support/vars.scad>
 include <support/threads.scad>
 include <support/polyround.scad>
 
 $fn = 100;
 
-tolerance = 0.4;
-wall = 4;
-rerr = 0.01;
+tol = tolerance("friction");
+wall = wall_size("strong");
 
 function in_to_mm(in) = in * 25.4;
 function inner_to_outer(id) = id - wall*2 - tolerance*4;

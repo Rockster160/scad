@@ -1,10 +1,11 @@
+include <support/vars.scad>
 include <support/in_to_mm.scad>
 
 w = in_to_mm(4);
 d = in_to_mm(8);
 h = in_to_mm(3);
 
-wall = 6;
+wall = wall_size("solid");
 
 slot_w = 20;
 slot_padding = 2;

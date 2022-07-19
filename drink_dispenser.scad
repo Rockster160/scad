@@ -1,3 +1,4 @@
+include <support/vars.scad>
 use <support/arc.scad>
 use <support/polyround.scad>
 use <support/in_to_mm.scad>
@@ -10,7 +11,7 @@ $fn=60;
 // Raise french cleat!!
 // Thicker walls?
 padding=1;
-wall = 3;
+wall = wall_size("weak");
 
 can_w = 53;
 can_h = in_to_mm(5 + 5/16);

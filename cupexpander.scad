@@ -1,9 +1,10 @@
+include <support/vars.scad>
+
 dep = 50;
 wr = 65/2;
 or = 100/2;
 h = 40;
-wall = 3;
-rerr = 0.001;
+wall = wall_size("weak");
 
 cylinder(r=wr, h=dep);
 

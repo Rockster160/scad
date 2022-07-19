@@ -1,7 +1,8 @@
+include <support/vars.scad>
+
 function in_to_mm(in) = in * 25.4;
 
-wall = 2;
-rerr = 0.01;
+wall = wall_size("flimsy");
 
 hdepth = in_to_mm(2.5);
 hwidth = in_to_mm(1.5);

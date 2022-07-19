@@ -1,8 +1,9 @@
+include <support/vars.scad>
 include <buttons.scad>
 use <../support/pushbutton.scad>
 
 enc_fit_space = 0.8;
-wall = 2;
+wall = wall_size("flimsy");
 
 inner_width = layout_width + enc_fit_space - height*2;
 inner_depth = layout_depth - wall;

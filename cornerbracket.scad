@@ -1,9 +1,9 @@
+include <support/vars.scad>
 include <support/roundedcube.scad>
 include <support/countersink.scad>
 
 inch = 25.4;
-rerr = 0.01;
-wall = 3;
+wall = wall_size("weak");
 
 screw_offset = inch/2 + wall/4;
 

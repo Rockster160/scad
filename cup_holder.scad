@@ -1,10 +1,11 @@
+include <support/vars.scad>
 use <support/in_to_mm.scad>
 use <support/countersink.scad>
 use <support/roundedcube.scad>
 
-wall = 2;
+wall = wall_size("flimsy");
 can_tolerance = 1.5;
-desk_tolerance = 0.5;
+desk_tolerance = tolerance("loose");;
 
 // Soda Can
 // can_w = in_to_mm(2.6);

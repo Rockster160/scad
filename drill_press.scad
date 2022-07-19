@@ -1,15 +1,16 @@
+include <support/vars.scad>
 use <support/in_to_mm.scad>
 use <support/countersink.scad>
 use <support/roundedcube.scad>
 use <support/centeredcube.scad>
 use <support/arc.scad>
 
-tolerance = 0.6;
+tolerance = tolerance("near");;
+wall = wall_size("stronger");
+
 bar = in_to_mm(0.5) + tolerance*2 - 0.1;
 max_distance = in_to_mm(4);
 opening = 70; // Clearance for pipes to miss drill
-wall = 5;
-rerr = 0.01;
 stable_height = in_to_mm(2);
 tool_bracket_h = max_distance - stable_height;
 

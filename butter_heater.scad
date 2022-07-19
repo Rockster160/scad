@@ -1,7 +1,7 @@
+include <support/vars.scad>
 include <support/in_to_mm.scad>
 
-wall = 3;
-r_err = 0.01;
+wall = wall_size("weak");
 
 box_w = in_to_mm(6);
 box_d = in_to_mm(4);

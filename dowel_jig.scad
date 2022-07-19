@@ -1,9 +1,8 @@
+include <support/vars.scad>
 function in_to_mm(in) = in * 25.4;
 
 hf = in_to_mm(1/2);
-wall = 2;
-rerr = 0.01;
-rerr2 = rerr*2;
+wall = wall_size("flimsy");
 
 // translate([0, hf+wall + 1, 0])
 // difference() {

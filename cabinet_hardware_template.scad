@@ -1,10 +1,10 @@
+include <support/vars.scad>
 include <support/in_to_mm.scad>
 include <support/roundedcube.scad>
 
 spacing = in_to_mm(1.25);
 clasp = 10;
-wall = 2;
-rerr = 0.01;
+wall = wall_size("flimsy");
 
 module hole() {
   cylinder(r=2, h=wall+rerr*2);

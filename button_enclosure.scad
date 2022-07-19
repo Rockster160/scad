@@ -1,6 +1,9 @@
+include <support/vars.scad>
+
+wall = wall_size("flimsy");
+
 btn_slot = 15.6;
 d = 30;
-wall = 2;
 wall2 = wall*2;
 dw = d + wall;
 

@@ -1,16 +1,16 @@
+include <support/vars.scad>
 include <support/scale_to.scad>
+include <esp.scad>
 
-inner_dome = 65;
-wall = 2;
+wall = wall_size("flimsy");
+tol = tolerance("loose");
+
+inner_dome = 80;
 led_w = 5.5;
-btn_slot = 16;
+btn_slot = 16.1;
 $fn=60;
 
-bat_w = 33.7;
-bat_d = 48.6;
-bat_h = 10;
-tol = 0.5;
-clip_wall = 3;
+clip_wall = wall_size("weak");
 clip_width = 5;
 clip_clip = 1;
 clip_h = bat_h + clip_clip;
@@ -91,6 +91,13 @@ module dome_plate() {
 // translate([-bat_d/2, -bat_w/2, wall])
 // cube([bat_d, bat_w, bat_h]);
 
-translate([dome_wall + 2, 0, 0])
-dome();
-dome_plate();
+// translate([dome_wall + 2, 0, 0])
+#dome();
+// dome_plate();
+
+translate([0, 0, bat_h])
+fullESP(center = true);
+translate([0, 0, dome_wall/2 - wall/2])
+button();
+
+battery();
