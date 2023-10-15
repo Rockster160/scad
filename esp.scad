@@ -1,8 +1,10 @@
 include <support/vars.scad>
+include <support/helpers.scad>
 
-esp_d = 34.15;
-esp_w = 26;
-esp_h = 1.25;
+esp_d = 34.7;
+esp_w = 25.9;
+esp_h = 1.25; // Only the board
+// esp_full_height is defined below
 
 micro_d = 5.6;
 micro_w = 7.7;
@@ -56,6 +58,8 @@ wire_bridge_h = 10.5 - relay_h;
 wire_bridge_y = 21.5;
 relay_wire_connector_spacing = 2;
 relay_wire_connector_w = 2.15;
+
+esp_full_height = micro_h + esp_h + esp_wifi_h;
 
 module txt(txt_str) {
   color("white")
@@ -113,56 +117,63 @@ module antenna() {
   }
 }
 
-module esp() {
-  difference() {
-    color([28/255, 85/255, 140/255])
-    cube([esp_w, esp_d, esp_h]);
+module esp(center=false) {
+  offset_x = center ? -esp_w/2 : 0;
+  offset_y = center ? -esp_d/2 : 0;
+  translate([offset_x, offset_y, 0]) {
+    // Board
+    difference() {
+      rgb(28, 85, 140)
+      cube([esp_w, esp_d, esp_h]);
 
-    translate([-rerr, -rerr, -rerr])
-    cube([2, 7, esp_h+(rerr*2)]);
+      translate([-rerr, -rerr, -rerr])
+      cube([2, 7, esp_h+(rerr*2)]);
+    }
+
+    // Micro USB Port
+    translate([esp_micro_x, 0, -micro_h])
+    color("silver")
+    cube([micro_w, micro_d, micro_h]);
+
+    // Wifi IC Chip/board
+    translate([esp_wifi_x, esp_wifi_y, esp_h])
+    color("silver")
+    cube([esp_wifi_w, esp_wifi_d, esp_wifi_h]);
+
+    translate([5, esp_d-7-rerr, esp_h+rerr])
+    antenna();
+
+    translate([0, 9, 0])
+    slot("3v3");
+
+    translate([0, esp_d-7.5, 0])
+    slot("RST");
+
+    translate([esp_w, 9, 0])
+    rotate([0, 0, 180])
+    slot("5v");
+
+    translate([esp_w, esp_d-7.5, 0])
+    rotate([0, 0, 180])
+    slot("TX");
   }
-
-  translate([esp_micro_x, 0, -micro_h])
-  color("silver")
-  cube([micro_w, micro_d, micro_h]);
-
-  translate([esp_wifi_x, esp_wifi_y, esp_h])
-  color("silver")
-  cube([esp_wifi_w, esp_wifi_d, esp_wifi_h]);
-
-  translate([5, esp_d-7-rerr, esp_h+rerr])
-  antenna();
-
-  translate([0, 9, 0])
-  slot("3v3");
-
-  translate([0, esp_d-7.5, 0])
-  slot("RST");
-
-  translate([esp_w, 9, 0])
-  rotate([0, 0, 180])
-  slot("5v");
-
-  translate([esp_w, esp_d-7.5, 0])
-  rotate([0, 0, 180])
-  slot("TX");
 }
 
 module shield() {
   difference() {
-    color([28/255, 85/255, 140/255])
+    rgb(28, 85, 140)
     cube([shield_w, shield_d, shield_h]);
 
     translate([-rerr, -rerr, -rerr])
     cube([2, 7, shield_h+(rerr*2)]);
   }
 
-  #color("tan")
+  color("tan")
   translate([shield_power_x, 0, shield_h])
   cube([shield_power_w, shield_power_d, shield_power_h]);
 
-  translate([shield_micro_x, 0, shield_h])
   color("silver")
+  translate([shield_micro_x, 0, shield_h])
   cube([micro_w, micro_d, micro_h]);
 
   translate([0, 9, 0])
@@ -180,7 +191,7 @@ module shield() {
   slot("TX");
 }
 
-module fullESP(center=false) {
+module espAndShield(center=false) {
   offset_x = center ? -esp_w/2 : 0;
   offset_y = center ? -esp_d/2 : 0;
   translate([offset_x, offset_y, micro_h]) {
@@ -219,8 +230,58 @@ module button() {
   }
 }
 
+module espWalls() {
+  difference() {
+    walls([esp_w, esp_d, esp_full_height]);
+
+    espWallsCutout();
+  }
+}
+module espWallsCutout() {
+  translate([1, 0, 0]) {
+    wificutout = [
+      12+4,
+      15+4,
+      3.1
+    ];
+    translate([-7.2-2, 12.3-2, -rerr+1])
+    translate([esp_w/2 + wall, 0, 0]) {
+      cube(wificutout);
+      translate([2.5, 2.5, -2])
+      cube([wificutout[0]-5, wificutout[1]-5, wificutout[2]]);
+    }
+    charger_w = 10;
+    charger_h = 8;
+    translate([13.3 - charger_w/2, -rerr, wall+1.5])
+    #cube([charger_w, wall*2, charger_h]);
+  }
+}
+
+module espCutout(with_shield=true, center=false) {
+  charger_w = 10;
+  charger_h = 6;
+  cutout_depth = 10;
+
+  module cutout() {
+    offset_x = center ? -esp_w/2 : 0;
+    offset_y = center ? -esp_d/2 : 0;
+    translate([0, -cutout_depth, 0])
+    translate([offset_x, offset_y, 0])
+    cube([charger_w + tol*2, cutout_depth+micro_d, charger_h + tol*2]);
+  }
+
+  translate([esp_micro_x + micro_w/2 - (charger_w + tol*2)/2, 0, -micro_h/2])
+  cutout();
+
+  if (with_shield) {
+    cut_h = esp_full_height;
+    translate([shield_micro_x + micro_w/2 - (charger_w + tol*2)/2, 0, cut_h])
+    cutout();
+  }
+}
+
 module battery() {
-  color("yellow", 0.8)
+  color("brown", 0.8)
   translate([-bat_w/2, -bat_d/2, 0])
   cube([bat_w, bat_d, bat_h]);
 }
@@ -322,6 +383,6 @@ module relay() {
   }
 }
 
-// fullESP();
+// espAndShield();
 // button();
 // relay();

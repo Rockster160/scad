@@ -1,7 +1,16 @@
 include <support/vars.scad>
 include <esp.scad>
-include <enclosure.scad>
+include <support/enclosure.scad>
 include <support/roundedcube.scad>
+
+// V2
+// * No battery
+// * Plug goes all the way into the box, so only the cord comes out
+// Low profile button
+// Mount everything to the box so the lid is independent
+
+// TODO: Would be cool to refactor this so the button (and all other externals) mounts inside the
+//   enclosure and the lid is just access and not attached through wires or anything.
 
 wall = wall_size("flimsy");
 tol = tolerance("loose");
@@ -88,7 +97,7 @@ module internals() {
   translate([0, 0, wall]) {
     translate([0, esp_d/2 + esp_space, 0])
     rotate([0, 0, 180])
-    fullESP(center=true);
+    espAndShield(center=true);
 
     translate([0, -bat_d - tol + enc_d - enc_w/2, button_offset])
     button();

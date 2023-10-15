@@ -55,7 +55,7 @@ module can() {
     // With Padding
     % translate([0, 0, -padding]) cylinder(r=can_pr, h=can_hp, $fn=60);
     // Can shape
-    color([0/255, 255/255, 0/255]) {
+    rgb(0, 255, 0) {
       cylinder(r=can_w/2, h=can_h, $fn=60);
     }
   }

@@ -85,7 +85,7 @@ module icon(file, frame_offset) {
 module icons() {
   icon_offset = padding + space + width/2;
   multiplier = width_offset;
-  // color([0/255, 0/255, 0/255]) {
+//   rgb(0, 0, 0) {
     translate([icon_offset, layout_depth - icon_offset, 0]) {
       // // [0,0] Events
       // translate([multiplier*0, -multiplier*0, height])

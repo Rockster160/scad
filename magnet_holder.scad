@@ -1,3 +1,5 @@
+include <support/enclosure_round.scad>
+
 $fn=100;
 
 t = 0.6;
@@ -33,15 +35,17 @@ module disc() {
   }
 }
 
-difference() {
-  bowl();
+enclosure_round(full_r, h);
 
-  translate([0, 0, h+wall]) {
-    disc();
-
-    cylinder(r1=lid_w, r2=rad, h=wall);
-  }
-}
+// difference() {
+//   bowl();
+//
+//   translate([0, 0, h+wall]) {
+//     disc();
+//
+//     cylinder(r1=lid_w, r2=rad, h=wall);
+//   }
+// }
 
 // translate([-full_r*2, 0, 0]) {
 //   difference() {

@@ -96,7 +96,7 @@ module dome_plate() {
 // dome_plate();
 
 translate([0, 0, bat_h])
-fullESP(center = true);
+espAndShield(center = true);
 translate([0, 0, dome_wall/2 - wall/2])
 button();
 
