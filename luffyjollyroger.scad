@@ -2,19 +2,6 @@ include <support/scale_to.scad>
 
 $fn = 60;
 
-// module icon(file, frame_offset) {
-//   translate([0, 0, -frame_offset]) {
-//     difference() {
-//       scale([1, 1, 0.3])
-//       resize([0, 0, 5], auto=true)
-//       surface(file=file, convexity=1, center=true);
-//
-//       translate([0, 0, -1.5 + frame_offset])
-//       cube([250, 250, 3], center=true);
-//     }
-//   }
-// }
-
 module andMirror(dirs) {
   mirror(dirs)
   children();
@@ -145,7 +132,3 @@ module skull() {
     nose();
   }
 }
-
-
-// %icon("/Users/rocco/Downloads/luffyflag.png", 0.05);
-//   icon("/Users/rocco/Downloads/zoroflag.png", 0.01);

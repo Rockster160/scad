@@ -4,12 +4,14 @@ include <luffyjollyroger.scad>
 include <support/in_to_mm.scad>
 include <support/vars.scad>
 
-innerwall = wall_size("flimsy");
 
 doround = !$preview;
+rounded = 2;
+
+innerwall = wall_size("flimsy");
 outerwall = innerwall*1.5;
 
-tol = tolerance("loose");
+tol = tolerance("friction");
 tol2 = tol*2;
 
 deck_w = 66;
@@ -26,7 +28,7 @@ cut = 40; // How tall the base of the box is
 slide = 15; // How much of an inner "slide" exists
 
 clip_offset = 5; // How far in the slide the clip appears
-clip_depth = 0.6; // How big the clip is
+clip_depth = 1; // How big the clip is
 
 module clip(depth) {
   translate([0, rerr, clip_depth])
@@ -42,14 +44,14 @@ module clip(depth) {
 module box() {
   difference() {
     union() {
-      roundedcube([box_w, box_d, box_h-cut], doround=doround);
+      roundedcube([box_w, box_d, box_h-cut], doround=doround, radius=rounded);
 
       translate([outerwall/2, outerwall/2, 0])
-      roundedcube([box_w-outerwall, box_d-outerwall, box_h-cut+slide], doround=doround);
+      roundedcube([box_w-outerwall, box_d-outerwall, box_h-cut+slide], doround=doround, radius=rounded);
     }
 
     translate([outerwall, outerwall, innerwall])
-    roundedcube([deck_w+spacing, deck_d+spacing, deck_h+spacing], doround=doround);
+    roundedcube([deck_w+spacing, deck_d+spacing, deck_h+spacing], doround=doround, radius=rounded);
 
     translate([outerwall*2 - tol, outerwall/2, box_h-cut+clip_offset])
     rotate([180, 0, 0])
@@ -64,10 +66,10 @@ module box() {
 
 module lid() {
   difference() {
-    roundedcube([box_w, box_d, cut], doround=doround);
+    roundedcube([box_w, box_d, cut], doround=doround, radius=rounded);
 
     translate([(outerwall/2)-tol, (outerwall/2)-tol, innerwall]) {
-      roundedcube([box_w-outerwall+tol2, box_d-outerwall+tol2, cut], doround=doround);
+      roundedcube([box_w-outerwall+tol2, box_d-outerwall+tol2, cut], doround=doround, radius=rounded);
     }
   }
 
@@ -79,7 +81,7 @@ module lid() {
   clip(box_w-(outerwall*4));
 }
 
-// roundedcube([], doround=doround);
+// roundedcube([], doround=doround, radius=rounded);
 box();
 
 // translate([0, box_d, box_h]) rotate([180, 0, 0])
