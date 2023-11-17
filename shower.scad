@@ -99,7 +99,7 @@ module new_electric_razor() {
   razor_width = 31;
   razor_depth = 35;
   angle = 20;
-  razor_walls = 3;
+  razor_walls = 7;
   razor_height = clip_height;
 
   razor_outer_width = razor_width + razor_walls*2;
