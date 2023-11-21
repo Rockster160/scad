@@ -113,7 +113,8 @@ module new_electric_razor() {
       }
 
       x_off = sin(angle) * razor_height;
-      y_off = razor_height - (cos(angle) * razor_height) - (sin(angle) * ((razor_depth/2)+6));
+
+      y_off = razor_height - (cos(angle) * razor_height) - (sin(angle) * ((razor_depth/2)+12));
       // 6 above is magic
 
       difference() {
