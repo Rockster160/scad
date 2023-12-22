@@ -259,8 +259,8 @@ module converter(size, angle=30, base=10, end_base=20) {
 // converter(35.5);
 
 // Skill Saw
-translate([0, 0, height - 1])
-converter(35.5);
+// translate([0, 0, height - 1])
+// converter(35.5);
 
 // Table Saw
 // translate([0, 0, height - 1])
@@ -279,8 +279,8 @@ converter(35.5);
 //   cube([3, 80, 5], center=true);
 // }
 
-// translate([0, 0, height - 1])
-// square_nozzle();
+translate([0, 0, height - 1])
+square_nozzle();
 
 adapter();
 

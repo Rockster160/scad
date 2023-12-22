@@ -114,7 +114,9 @@ module new_electric_razor() {
 
       x_off = sin(angle) * razor_height;
 
-      y_off = razor_height - (cos(angle) * razor_height) - (sin(angle) * ((razor_depth/2)+12));
+      vertical_offset = 12;
+      // This is where to place the angle. Higher number gives more of a "foot"
+      y_off = razor_height - (cos(angle) * razor_height) - (sin(angle) * ((razor_depth/2)+vertical_offset));
       // 6 above is magic
 
       difference() {
