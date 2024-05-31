@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="transparent" stroke="black">
+  <g layer="body">
+    <path id="slimeBody" fill="black" stroke="none" d="M 5 65 C 0,110 100,110 95,65 C 90,40 60,45 55,15 C 53,5 47,5 45,15 C 40,45 10,40 5,65 Z" />
+  </g>
+</svg>
