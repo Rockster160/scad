@@ -7,12 +7,13 @@ presentation_angle = 70;
 // Vert    = 90
 // Default = 70
 // Flat    = 0
+// 10.25
 
 // Advanced
-bump_h = 25;
+bump_h = 27; // 25 normally
 foot_angle = 15;
 wall_height = 65;
-platform_width = 20;
+platform_width = 25; // 20 normally
 depth = 50;
 wall = 1;
 
@@ -60,7 +61,7 @@ difference() {
 
       // Seat/Charge slot
       translate([s1.x, s1.y + 10 - wall - round_radius, 0])
-      # roundedcube([13, 20, 10], center=true, radius=round_radius);
+      # roundedcube([13, 20, 13], center=true, radius=round_radius);
     }
   }
 }
